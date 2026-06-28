@@ -1,0 +1,329 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+:root {
+    --primary-color: #0F52BA; /* 신뢰감 사파이어 블루 */
+    --secondary-color: #00A86B; /* HACCP의 핵심 안전 비취 그린 */
+    --dark-color: #111111;
+    --light-color: #F8F9FA;
+    --gray-color: #666666;
+    --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    overflow-x: hidden;
+    letter-spacing: -0.02em;
+}
+
+/* Header Navigation */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+    background: rgba(17, 17, 17, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+header.scrolled {
+    padding: 15px 40px;
+    background: rgba(17, 17, 17, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #fff, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
+}
+
+.hero h1 {
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards 0.3s;
+}
+
+.hero p {
+    font-size: clamp(16px, 2vw, 22px);
+    color: #ccc;
+    max-width: 600px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards 0.6s;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    animation: bounce 2s infinite;
+}
+
+/* Scroll Interaction Container */
+.interactive-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Sticky Tabs Navigation */
+.sticky-tabs {
+    position: sticky;
+    top: 73px;
+    display: flex;
+    justify-content: center;
+    background: rgba(17, 17, 17, 0.85);
+    backdrop-filter: blur(15px);
+    z-index: 900;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 20px;
+}
+
+.tab-btn {
+    padding: 25px 40px;
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition-smooth);
+    transform: translateX(-50%);
+}
+
+.tab-btn.active {
+    color: var(--light-color);
+}
+
+.tab-btn.active::after {
+    width: 100%;
+}
+
+/* Content Sections */
+.content-section {
+    min-height: 100vh;
+    padding: 120px 10% 80px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-text {
+    flex: 1;
+    max-width: 550px;
+}
+
+.section-number {
+    font-size: 72px;
+    font-weight: 900;
+    font-family: serif;
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-text h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.section-text p {
+    font-size: 18px;
+    color: #aaa;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.section-visual {
+    flex: 1;
+    height: 500px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+}
+
+.visual-box {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1.2s ease;
+}
+
+.content-section.visible .visual-box {
+    transform: scale(1.05);
+}
+
+/* 테마 인터랙션 (스크롤 위치에 따른 UX 감도 제어) */
+#section1 { background-color: #111111; }
+#section1 .visual-box { background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1000'); }
+
+#section2 { background-color: #0b111e; } /* 딥 네이비 감도 전환 */
+#section2 .visual-box { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000'); }
+
+#section3 { background-color: #071612; } /* 안정적인 그린톤 피드백 */
+#section3 .visual-box { background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000'); }
+
+/* Footer */
+footer {
+    background-color: #080808;
+    padding: 60px 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+    color: #888;
+    line-height: 1.8;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.footer-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.info-item span {
+    display: block;
+    color: #bbb;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.blog-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.blog-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -10px); }
+    60% { transform: translate(-50%, -5px); }
+}
+
+/* Media Queries (반응형 퍼블리싱 가이드 대응) */
+@media (max-width: 968px) {
+    header { padding: 20px; }
+    .sticky-tabs { top: 65px; }
+    .tab-btn { padding: 15px 20px; font-size: 14px; }
+    .content-section {
+        flex-direction: column;
+        padding: 100px 20px 60px 20px;
+        gap: 40px;
+        text-align: center;
+    }
+    .section-text { max-width: 100%; }
+    .section-visual { width: 100%; height: 350px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+}
